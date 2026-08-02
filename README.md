@@ -49,4 +49,4 @@ CropGuard AI is a professional AI-powered web application built with Python (Fla
 4. **Access in Browser**:
    - Public Landing Page: `http://localhost:5000`
    - Public Leaf Upload: `http://localhost:5000/detect`
-   - Admin Login Portal: `http://localhost:5000/admin/login` (User: `host` | Pass: `CropGuard@2026`)
+   - Admin Login Portal: `http://localhost:5000/admin/login`
