@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CropGuard AI - Dashboard</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <div class="logo-icon">🌿</div>
+            <span>CropGuard AI</span>
+        </div>
+        <div class="navbar-nav">
+            <a href="/dashboard" class="active">Dashboard</a>
+            <a href="/detect">Detect</a>
+            <a href="/reports">Reports</a>
+        </div>
+        <div class="nav-user">
+            <span class="user-badge" id="user-name" data-name="User">👤 User</span>
+            <button class="btn-logout" onclick="handleLogout()">Logout</button>
+        </div>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <div class="dashboard-container">
+        <div class="page-header">
+            <h1>Welcome to Your Dashboard</h1>
+            <p>Monitor your crop health and manage real detection reports stored in database</p>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon blue">📊</div>
+                <div class="stat-info">
+                    <h3 id="total-reports">0</h3>
+                    <p>Total Reports Stored</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon orange">⚠️</div>
+                <div class="stat-info">
+                    <h3 id="deficiency-found">0</h3>
+                    <p>Deficiencies Detected</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon green">✅</div>
+                <div class="stat-info">
+                    <h3 id="healthy-crops">0</h3>
+                    <p>Healthy Crop Leaves</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon purple">🔬</div>
+                <div class="stat-info">
+                    <h3>CV Engine</h3>
+                    <p>Feature Engine Active</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <h2 style="margin-bottom: 1rem; color: var(--primary-dark);">Quick Actions</h2>
+        <div class="quick-actions">
+            <div class="action-card" onclick="window.location.href='/detect'">
+                <div class="icon">📸</div>
+                <h3>New Detection</h3>
+                <p>Upload a crop leaf image to perform computer vision feature analysis</p>
+            </div>
+            <div class="action-card" onclick="window.location.href='/reports'">
+                <div class="icon">📋</div>
+                <h3>Database Reports</h3>
+                <p>Access all stored records and original uploaded leaf images</p>
+            </div>
+            <div class="action-card">
+                <div class="icon">📚</div>
+                <h3>Deficiency Library</h3>
+                <p>Learn about Nitrogen, Phosphorus, Potassium & Iron symptoms</p>
+            </div>
+            <div class="action-card">
+                <div class="icon">🌱</div>
+                <h3>Best Practices</h3>
+                <p>Discover sustainable fertilizer schedules and organic soil care</p>
+            </div>
+        </div>
+
+        <!-- Recent Activity Feed -->
+        <h2 style="margin-bottom: 1rem; color: var(--primary-dark); display: flex; justify-content: space-between; align-items: center;">
+            <span>📸 Recent Image Detections</span>
+            <a href="/reports" style="font-size: 0.9rem; font-weight: 500;">View All History &rarr;</a>
+        </h2>
+        <div id="recent-activity" class="recent-grid">
+            <div style="padding: 2rem; text-align: center; color: var(--text-muted); background: white; border-radius: var(--radius); width: 100%;">
+                <p>Loading recent detections...</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 CropGuard AI - AI-Powered Crop Nutrient Deficiency Detection System</p>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

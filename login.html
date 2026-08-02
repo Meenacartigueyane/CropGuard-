@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CropGuard AI - Host Login</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-left">
+            <h1>🌿 CropGuard AI</h1>
+            <p>Host Portal - Real Crop Deficiency Detection & Database Storage</p>
+            <ul class="features-list">
+                <li>🔑 Host Login ID & Password Authentication</li>
+                <li>📸 Real Computer Vision Feature Spectrum Analysis</li>
+                <li>💾 Database Details & Metrics Persistence</li>
+                <li>🖼️ Original Uploaded Leaf Photo Display</li>
+                <li>📊 Full Detection History & Recommendations</li>
+            </ul>
+        </div>
+        <div class="auth-right">
+            <div class="auth-form">
+                <h2>Host Portal Access</h2>
+                <p class="subtitle">Enter your Host Login ID and Password</p>
+                
+                <div id="login-alert" class="alert"></div>
+                
+                <form onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="username">🔑 Host Login ID</label>
+                        <input type="text" id="username" placeholder="Enter Host Login ID" value="admin" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">🔒 Password</label>
+                        <input type="password" id="password" placeholder="Enter Password" value="admin123" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Host Login</button>
+                </form>
+
+                <div style="margin-top: 1.5rem; background: #e8f4ea; border: 1px solid #c8e6c9; border-radius: 8px; padding: 1rem; text-align: center;">
+                    <p style="font-size: 0.85rem; font-weight: 600; color: var(--primary-dark); margin-bottom: 0.4rem;">
+                        💡 Default Host Credentials:
+                    </p>
+                    <p style="font-size: 0.85rem; color: var(--text-dark);">
+                        <strong>Login ID:</strong> <code>admin</code> &nbsp;|&nbsp; <strong>Password:</strong> <code>admin123</code>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

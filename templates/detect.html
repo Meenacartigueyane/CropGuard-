@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#1b4332">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="/static/manifest.json">
+    <title>CropGuard AI - Upload Leaf & Detect (Mobile Ready)</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+                <i class="fa-solid fa-leaf text-success fs-3"></i>
+                <span class="navbar-brand-text">CropGuard <span style="color: #74c69d;">AI</span></span>
+            </a>
+            <div class="navbar-nav ms-auto gap-2 flex-row">
+                <a class="nav-link nav-link-custom py-2 px-3" href="/">Home</a>
+                <a class="nav-link nav-link-custom active py-2 px-3" href="/detect">Detect</a>
+                <a class="btn btn-success btn-sm rounded-pill px-3 ms-2 align-self-center" href="/admin/login"><i class="fa-solid fa-lock me-1"></i> Admin</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Network Banner Info -->
+    <div class="bg-success bg-opacity-10 border-bottom py-2 px-3 text-center">
+        <span class="small text-success fw-bold">
+            📱 Mobile Access: Connect Wi-Fi & open <code class="bg-white px-2 py-1 rounded text-dark">http://192.168.1.6:5000</code> on your smartphone!
+        </span>
+    </div>
+
+    <!-- Upload Content -->
+    <div class="container py-4 py-md-5">
+        <div class="max-w-700 mx-auto">
+            
+            <div class="text-center mb-4">
+                <span class="badge bg-success bg-opacity-10 text-success px-3 py-2 rounded-pill fw-bold text-uppercase">Multi-Crop AI Diagnostics</span>
+                <h1 class="display-6 fw-bold mt-2">Upload or Take Leaf Photo</h1>
+                <p class="text-muted small">Snap a photo using your smartphone camera or select an image from your device.</p>
+            </div>
+
+            <div id="detect-alert"></div>
+
+            <div class="glass-card">
+                
+                <!-- Crop Selector Dropdown -->
+                <div class="mb-4">
+                    <label for="crop-select" class="form-label fw-bold text-success">
+                        <i class="fa-solid fa-seedling me-1"></i> Select Crop Species / Variety
+                    </label>
+                    <select id="crop-select" class="form-select form-select-lg rounded-3 fs-6 py-3">
+                        <option value="Auto-Detect">✨ Auto-Detect Leaf Morphology</option>
+                        <option value="Rice">🌾 Rice / Paddy (Oryza sativa)</option>
+                        <option value="Tomato">🍅 Tomato (Solanum lycopersicum)</option>
+                        <option value="Maize">🌽 Maize / Corn (Zea mays)</option>
+                        <option value="Wheat">🌾 Wheat (Triticum aestivum)</option>
+                        <option value="Cotton">🌱 Cotton (Gossypium)</option>
+                        <option value="Chilli">🌶️ Chilli / Pepper (Capsicum annuum)</option>
+                        <option value="Groundnut">🥜 Groundnut / Peanut (Arachis hypogaea)</option>
+                        <option value="Potato">🥔 Potato (Solanum tuberosum)</option>
+                        <option value="Sugarcane">🎋 Sugarcane (Saccharum officinarum)</option>
+                        <option value="Brinjal">🍆 Brinjal / Eggplant (Solanum melongena)</option>
+                        <option value="Citrus">🍋 Citrus / Lemon (Citrus limon)</option>
+                        <option value="Apple">🍎 Apple (Malus domestica)</option>
+                        <option value="Grape">🍇 Grape (Vitis vinifera)</option>
+                        <option value="Soybean">🫘 Soybean (Glycine max)</option>
+                        <option value="Coffee">☕ Coffee (Coffea)</option>
+                        <option value="Tea">🍵 Tea (Camellia sinensis)</option>
+                        <option value="Papaya">🥭 Papaya (Carica papaya)</option>
+                        <option value="Mango">🥭 Mango (Mangifera indica)</option>
+                    </select>
+                </div>
+
+                <!-- Mobile Buttons & Drag-Drop Area -->
+                <div class="border border-2 border-dashed rounded-4 p-4 p-md-5 text-center cursor-pointer transition-all bg-white" id="upload-area">
+                    <i class="fa-solid fa-camera-retro text-success display-3 mb-3"></i>
+                    <h4 class="fw-bold mb-1 fs-5">Snap Photo or Select File</h4>
+                    <p class="text-muted small mb-4">Tap below to open camera or browse gallery</p>
+
+                    <!-- Mobile Action Buttons -->
+                    <div class="d-flex justify-content-center gap-3 flex-wrap">
+                        <button type="button" class="btn btn-success btn-lg rounded-pill px-4 py-3 fw-bold flex-grow-1" onclick="document.getElementById('camera-input').click()">
+                            <i class="fa-solid fa-camera me-2"></i> Take Leaf Photo
+                        </button>
+                        <button type="button" class="btn btn-outline-success btn-lg rounded-pill px-4 py-3 fw-bold flex-grow-1" onclick="document.getElementById('file-input').click()">
+                            <i class="fa-solid fa-folder-open me-2"></i> Gallery / File
+                        </button>
+                    </div>
+
+                    <!-- Hidden Inputs -->
+                    <input type="file" id="camera-input" class="d-none" accept="image/*" capture="environment">
+                    <input type="file" id="file-input" class="d-none" accept="image/png, image/jpeg, image/jpg">
+                </div>
+
+                <!-- Selected File Preview Section -->
+                <div id="preview-section" class="d-none mt-4 p-3 bg-light rounded-4 border">
+                    <div class="row align-items-center g-3">
+                        <div class="col-12 col-md-5 text-center">
+                            <img id="preview-image" src="" alt="Leaf Preview" class="img-fluid rounded-3 border shadow-sm" style="max-height: 220px; width: 100%; object-fit: contain;">
+                        </div>
+                        <div class="col-12 col-md-7">
+                            <h5 class="fw-bold text-success mb-1" id="file-name-text">Photo Loaded</h5>
+                            <p class="text-muted small mb-3" id="file-size-text">Size: - KB</p>
+                            <button class="btn btn-success btn-lg rounded-pill px-4 py-3 w-100 fw-bold shadow-sm" id="btn-analyze-submit" onclick="submitLeafDetection()">
+                                <i class="fa-solid fa-wand-magic-sparkles me-2"></i> Run AI Diagnostics
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Processing Overlay -->
+                <div id="loading-overlay" class="d-none text-center py-4">
+                    <div class="spinner-border text-success" style="width: 3.5rem; height: 3.5rem;" role="status"></div>
+                    <h5 class="fw-bold mt-3 text-success">Processing Leaf Image...</h5>
+                    <p class="text-muted small">Segmenting leaf features & analyzing color spectrum...</p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-custom">
+        <div class="container text-center">
+            <p class="small text-white-50 mb-0">&copy; 2026 CropGuard AI Mobile Portal.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

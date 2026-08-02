@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CropGuard AI - Admin Dashboard & Analytics</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+    <!-- Admin Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="/admin/dashboard">
+                <i class="fa-solid fa-shield-halved text-success fs-3"></i>
+                <span class="navbar-brand-text">CropGuard <span style="color: #74c69d;">Admin Portal</span></span>
+            </a>
+            <div class="navbar-nav ms-auto gap-2 align-items-center">
+                <a class="nav-link nav-link-custom active" href="/admin/dashboard"><i class="fa-solid fa-chart-line me-1"></i> Dashboard</a>
+                <a class="nav-link nav-link-custom" href="/admin/fertilizers"><i class="fa-solid fa-vial me-1"></i> Fertilizer Rules</a>
+                <a class="nav-link nav-link-custom" href="/admin/password"><i class="fa-solid fa-key me-1"></i> Password</a>
+                <a class="btn btn-outline-danger btn-sm rounded-pill px-3 ms-2" href="/admin/logout"><i class="fa-solid fa-right-from-bracket me-1"></i> Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <div class="container-fluid px-4 py-4">
+        
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
+            <div>
+                <h2 class="fw-bold text-success mb-1">Administrative Control Center</h2>
+                <p class="text-muted small mb-0">Real-time prediction metrics, leaf analytics, and SQLite database records</p>
+            </div>
+            <div class="d-flex gap-2">
+                <a href="/admin/export/csv" class="btn btn-outline-success rounded-pill px-3 fw-semibold">
+                    <i class="fa-solid fa-file-csv me-1"></i> Export CSV
+                </a>
+                <a href="/admin/export/pdf" class="btn btn-success rounded-pill px-3 fw-semibold">
+                    <i class="fa-solid fa-file-pdf me-1"></i> Export PDF Report
+                </a>
+            </div>
+        </div>
+
+        <!-- 8 Stat Cards Grid -->
+        <div class="row g-3 mb-4">
+            <div class="col-xl-3 col-md-6">
+                <div class="glass-card p-3 bg-white d-flex align-items-center gap-3">
+                    <div class="p-3 bg-primary bg-opacity-10 text-primary rounded-circle"><i class="fa-solid fa-database fs-3"></i></div>
+                    <div>
+                        <span class="text-muted small fw-bold text-uppercase">Total Predictions</span>
+                        <h3 class="fw-bold mb-0 text-dark" id="stat-total">0</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="glass-card p-3 bg-white d-flex align-items-center gap-3">
+                    <div class="p-3 bg-success bg-opacity-10 text-success rounded-circle"><i class="fa-solid fa-seedling fs-3"></i></div>
+                    <div>
+                        <span class="text-muted small fw-bold text-uppercase">Healthy Plants</span>
+                        <h3 class="fw-bold mb-0 text-success" id="stat-healthy">0</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="glass-card p-3 bg-white d-flex align-items-center gap-3">
+                    <div class="p-3 bg-warning bg-opacity-10 text-warning rounded-circle"><i class="fa-solid fa-triangle-exclamation fs-3"></i></div>
+                    <div>
+                        <span class="text-muted small fw-bold text-uppercase">Deficient Plants</span>
+                        <h3 class="fw-bold mb-0 text-warning" id="stat-deficient">0</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="glass-card p-3 bg-white d-flex align-items-center gap-3">
+                    <div class="p-3 bg-info bg-opacity-10 text-info rounded-circle"><i class="fa-solid fa-calendar-day fs-3"></i></div>
+                    <div>
+                        <span class="text-muted small fw-bold text-uppercase">Today's Uploads</span>
+                        <h3 class="fw-bold mb-0 text-info" id="stat-today">0</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6">
+                <div class="glass-card p-3 bg-white d-flex align-items-center gap-3">
+                    <div class="p-3 bg-secondary bg-opacity-10 text-secondary rounded-circle"><i class="fa-solid fa-calendar-week fs-3"></i></div>
+                    <div>
+                        <span class="text-muted small fw-bold text-uppercase">Weekly Uploads</span>
+                        <h3 class="fw-bold mb-0 text-dark" id="stat-weekly">0</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="glass-card p-3 bg-white d-flex align-items-center gap-3">
+                    <div class="p-3 bg-dark bg-opacity-10 text-dark rounded-circle"><i class="fa-solid fa-calendar-days fs-3"></i></div>
+                    <div>
+                        <span class="text-muted small fw-bold text-uppercase">Monthly Uploads</span>
+                        <h3 class="fw-bold mb-0 text-dark" id="stat-monthly">0</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="glass-card p-3 bg-white d-flex align-items-center gap-3">
+                    <div class="p-3 bg-danger bg-opacity-10 text-danger rounded-circle"><i class="fa-solid fa-bug fs-3"></i></div>
+                    <div>
+                        <span class="text-muted small fw-bold text-uppercase">Top Deficiency</span>
+                        <h4 class="fw-bold mb-0 text-danger fs-5" id="stat-top-def">-</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="glass-card p-3 bg-white d-flex align-items-center gap-3">
+                    <div class="p-3 bg-success bg-opacity-10 text-success rounded-circle"><i class="fa-solid fa-wheat-awn fs-3"></i></div>
+                    <div>
+                        <span class="text-muted small fw-bold text-uppercase">Top Crop Species</span>
+                        <h4 class="fw-bold mb-0 text-success fs-5" id="stat-top-crop">-</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chart.js Visualizations Row -->
+        <div class="row g-4 mb-4">
+            <div class="col-lg-8">
+                <div class="glass-card bg-white p-4">
+                    <h5 class="fw-bold text-success mb-3"><i class="fa-solid fa-chart-column me-2"></i>Deficiency Distribution by Crop Species</h5>
+                    <div style="height: 280px;">
+                        <canvas id="adminBarChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="glass-card bg-white p-4">
+                    <h5 class="fw-bold text-success mb-3"><i class="fa-solid fa-chart-pie me-2"></i>Severity Level Ratio</h5>
+                    <div style="height: 280px;">
+                        <canvas id="adminSeverityPieChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Predictions Records Table -->
+        <div class="glass-card bg-white p-4">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-3">
+                <h5 class="fw-bold text-success mb-0"><i class="fa-solid fa-table-list me-2"></i>All Prediction Records</h5>
+                
+                <div class="d-flex gap-2 flex-wrap">
+                    <input type="text" id="admin-search" class="form-control form-control-sm rounded-pill px-3" style="width: 200px;" placeholder="Search Report ID / Crop / Deficiency" onkeyup="filterAdminTable()">
+                    
+                    <select id="filter-crop" class="form-select form-select-sm rounded-pill px-3" onchange="filterAdminTable()">
+                        <option value="">All Crops</option>
+                        <option value="Rice">Rice</option>
+                        <option value="Tomato">Tomato</option>
+                        <option value="Maize">Maize</option>
+                        <option value="Wheat">Wheat</option>
+                        <option value="Cotton">Cotton</option>
+                        <option value="Chilli">Chilli</option>
+                        <option value="Groundnut">Groundnut</option>
+                    </select>
+
+                    <select id="filter-severity" class="form-select form-select-sm rounded-pill px-3" onchange="filterAdminTable()">
+                        <option value="">All Severities</option>
+                        <option value="Mild">Mild</option>
+                        <option value="Moderate">Moderate</option>
+                        <option value="Severe">Severe</option>
+                        <option value="None">None</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table custom-table mb-0 align-middle">
+                    <thead>
+                        <tr>
+                            <th>Original Image</th>
+                            <th>Report ID</th>
+                            <th>Date</th>
+                            <th>Crop Type</th>
+                            <th>Deficiency</th>
+                            <th>Confidence</th>
+                            <th>Severity</th>
+                            <th>Affected %</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-table-body">
+                        <tr><td colspan="9" class="text-center py-4 text-muted">Loading predictions...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let allPredictions = [];
+        let barChartInst = null;
+        let pieChartInst = null;
+
+        async function loadAdminDashboard() {
+            try {
+                // Fetch Stats
+                const statsRes = await fetch('/api/admin/stats');
+                const statsData = await statsRes.json();
+                
+                if (statsData.success) {
+                    const s = statsData.stats;
+                    document.getElementById('stat-total').textContent = s.total_predictions;
+                    document.getElementById('stat-healthy').textContent = s.healthy_plants;
+                    document.getElementById('stat-deficient').textContent = s.deficient_plants;
+                    document.getElementById('stat-today').textContent = s.today_uploads;
+                    document.getElementById('stat-weekly').textContent = s.weekly_uploads;
+                    document.getElementById('stat-monthly').textContent = s.monthly_uploads;
+                    document.getElementById('stat-top-def').textContent = s.most_common_deficiency;
+                    document.getElementById('stat-top-crop').textContent = s.most_common_crop;
+
+                    renderAdminCharts(s);
+                }
+
+                // Fetch Predictions Table
+                const predsRes = await fetch('/api/admin/predictions');
+                const predsData = await predsRes.json();
+                if (predsData.success) {
+                    allPredictions = predsData.data;
+                    renderPredictionsTable(allPredictions);
+                }
+            } catch (err) {
+                console.error('Admin dashboard load error', err);
+            }
+        }
+
+        function renderAdminCharts(stats) {
+            // Bar Chart for Deficiencies Distribution
+            const barCtx = document.getElementById('adminBarChart');
+            if (barCtx) {
+                const labels = stats.deficiencies_dist.map(d => d.deficiency_type);
+                const counts = stats.deficiencies_dist.map(d => d.cnt);
+                
+                if (barChartInst) barChartInst.destroy();
+                barChartInst = new Chart(barCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels.length ? labels : ['None'],
+                        datasets: [{
+                            label: 'Predictions Count',
+                            data: counts.length ? counts : [0],
+                            backgroundColor: '#2d6a4f',
+                            borderRadius: 6
+                        }]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false }
+                });
+            }
+
+            // Pie Chart for Severity Ratio
+            const pieCtx = document.getElementById('adminSeverityPieChart');
+            if (pieCtx) {
+                const labels = stats.severities_dist.map(s => s.severity_level);
+                const counts = stats.severities_dist.map(s => s.cnt);
+
+                if (pieChartInst) pieChartInst.destroy();
+                pieChartInst = new Chart(pieCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: labels.length ? labels : ['None'],
+                        datasets: [{
+                            data: counts.length ? counts : [1],
+                            backgroundColor: ['#28a745', '#ffc107', '#dc3545', '#6c757d']
+                        }]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false }
+                });
+            }
+        }
+
+        function renderPredictionsTable(data) {
+            const tbody = document.getElementById('admin-table-body');
+            if (!tbody) return;
+
+            if (data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="9" class="text-center py-4 text-muted">No prediction records found.</td></tr>';
+                return;
+            }
+
+            let html = '';
+            data.forEach(p => {
+                const sevClass = (p.severity_level || '').toLowerCase() === 'mild' ? 'severity-mild' :
+                                 (p.severity_level || '').toLowerCase() === 'moderate' ? 'severity-moderate' :
+                                 (p.severity_level || '').toLowerCase() === 'severe' ? 'severity-severe' : 'severity-none';
+                
+                html += `
+                    <tr>
+                        <td>
+                            <a href="${p.image_url}" target="_blank">
+                                <img src="${p.image_url}" style="width: 50px; height: 50px; border-radius: 8px; object-fit: cover; border: 1px solid #dee2e6;">
+                            </a>
+                        </td>
+                        <td class="fw-bold">${p.report_id}</td>
+                        <td>${p.created_at.split(' ')[0]}</td>
+                        <td><strong>${p.crop_type}</strong></td>
+                        <td>${p.deficiency_type}</td>
+                        <td>${p.confidence}%</td>
+                        <td><span class="severity-badge ${sevClass}">${p.severity_level}</span></td>
+                        <td>${p.affected_area_pct}%</td>
+                        <td>
+                            <a href="/results/${p.report_id}" class="btn btn-sm btn-outline-success rounded-pill px-2">View</a>
+                            <a href="/api/pdf/${p.report_id}" class="btn btn-sm btn-success rounded-pill px-2">PDF</a>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            tbody.innerHTML = html;
+        }
+
+        function filterAdminTable() {
+            const search = document.getElementById('admin-search').value.toLowerCase();
+            const crop = document.getElementById('filter-crop').value;
+            const severity = document.getElementById('filter-severity').value;
+
+            const filtered = allPredictions.filter(p => {
+                const matchSearch = p.report_id.toLowerCase().includes(search) || p.crop_type.toLowerCase().includes(search) || p.deficiency_type.toLowerCase().includes(search);
+                const matchCrop = !crop || p.crop_type === crop;
+                const matchSeverity = !severity || p.severity_level === severity;
+                return matchSearch && matchCrop && matchSeverity;
+            });
+
+            renderPredictionsTable(filtered);
+        }
+
+        document.addEventListener('DOMContentLoaded', loadAdminDashboard);
+    </script>
+</body>
+</html>

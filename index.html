@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CropGuard AI - Smart Crop Nutrient Deficiency Detection</title>
+    <!-- Bootstrap 5 CSS & Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+                <i class="fa-solid fa-leaf text-success fs-3"></i>
+                <span class="navbar-brand-text">CropGuard <span style="color: #74c69d;">AI</span></span>
+            </a>
+            <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-2">
+                    <li class="nav-item"><a class="nav-link nav-link-custom active" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link nav-link-custom" href="#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link nav-link-custom" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link nav-link-custom" href="#contact">Contact</a></li>
+                    <li class="nav-item ms-lg-2"><a class="btn btn-outline-light rounded-pill px-3" href="/detect"><i class="fa-solid fa-camera me-1"></i> Detect Now</a></li>
+                    <li class="nav-item ms-lg-1"><a class="btn btn-success rounded-pill px-3" href="/admin/login"><i class="fa-solid fa-lock me-1"></i> Admin Portal</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section text-center">
+        <div class="container position-relative z-1">
+            <span class="hero-badge"><i class="fa-solid fa-wand-magic-sparkles me-2"></i>AI-Powered Agricultural Computer Vision</span>
+            <h1 class="display-3 fw-bold mb-3">Crop Nutrient Deficiency Detection</h1>
+            <p class="lead max-w-700 mx-auto opacity-90 mb-4">
+                Instantly diagnose Nitrogen, Phosphorus, Potassium, Iron, Zinc, and Magnesium deficiencies in your crops using advanced OpenCV image segmentation and AI analysis.
+            </p>
+            <div class="d-flex justify-content-center gap-3 flex-wrap">
+                <a href="/detect" class="btn btn-hero">
+                    <i class="fa-solid fa-cloud-arrow-up me-2"></i> Upload Leaf Image
+                </a>
+                <a href="#features" class="btn btn-outline-light rounded-pill px-4 py-3 fw-semibold fs-5">
+                    Explore Features
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Supported Crops Ribbon -->
+    <section class="bg-white py-4 shadow-sm border-bottom">
+        <div class="container text-center">
+            <p class="text-muted fw-bold text-uppercase small tracking-wide mb-3">Supported Crop Species</p>
+            <div class="d-flex justify-content-center align-items-center gap-4 flex-wrap text-success fs-5 fw-semibold">
+                <span>🌾 Rice</span>
+                <span>🍅 Tomato</span>
+                <span>🌽 Maize</span>
+                <span>🌾 Wheat</span>
+                <span>🌱 Cotton</span>
+                <span>🌶️ Chilli</span>
+                <span>🥜 Groundnut</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5">
+        <div class="container py-4">
+            <div class="text-center mb-5">
+                <span class="text-success fw-bold text-uppercase tracking-wide">Why Choose CropGuard AI</span>
+                <h2 class="display-6 fw-bold mt-1">Advanced Diagnostics Features</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="glass-card h-100 text-center">
+                        <div class="feature-icon-wrapper mx-auto"><i class="fa-solid fa-microscope"></i></div>
+                        <h4 class="fw-bold mb-2">OpenCV HSV Segmentation</h4>
+                        <p class="text-muted">Extracts leaf contours, removes background noise, and accurately calculates affected area percentages.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="glass-card h-100 text-center">
+                        <div class="feature-icon-wrapper mx-auto"><i class="fa-solid fa-chart-pie"></i></div>
+                        <h4 class="fw-bold mb-2">Spectrum Breakdown</h4>
+                        <p class="text-muted">Measures Healthy Green %, Yellow Chlorosis %, Browning Necrosis %, and Purple Anthocyanin % accurately summing to 100%.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="glass-card h-100 text-center">
+                        <div class="feature-icon-wrapper mx-auto"><i class="fa-solid fa-file-pdf"></i></div>
+                        <h4 class="fw-bold mb-2">Downloadable PDF Reports</h4>
+                        <p class="text-muted">Generates pixel-perfect diagnostic certificates using ReportLab, ready for print and field records.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5 bg-white">
+        <div class="container py-4">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <div class="p-4 rounded-4 bg-light border text-center">
+                        <i class="fa-solid fa-seedling text-success" style="font-size: 8rem;"></i>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <span class="text-success fw-bold text-uppercase tracking-wide">About CropGuard AI</span>
+                    <h2 class="display-6 fw-bold mt-1 mb-3">Precision Agriculture for Every Farmer</h2>
+                    <p class="text-muted leading-relaxed mb-4">
+                        CropGuard AI bridges modern computer vision technology with everyday farming. By detecting early signs of chlorosis, necrosis, and anthocyanin accumulation, farmers can apply targeted fertilizer dosages, reduce soil degradation, and improve crop yield.
+                    </p>
+                    <a href="/detect" class="btn btn-success rounded-pill px-4 py-2 font-semibold">Start Free Detection</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5">
+        <div class="container py-4 text-center">
+            <div class="max-w-700 mx-auto glass-card">
+                <span class="text-success fw-bold text-uppercase tracking-wide">Need Support?</span>
+                <h2 class="fw-bold mt-1 mb-3">Get in Touch with Agricultural AI Experts</h2>
+                <p class="text-muted mb-4">Have questions about fertilizer recommendations or crop diagnostics? Send us a message.</p>
+                <form onsubmit="alert('Thank you! Our agricultural expert will contact you shortly.'); return false;">
+                    <div class="row g-3">
+                        <div class="col-md-6"><input type="text" class="form-control form-control-lg rounded-3" placeholder="Your Name" required></div>
+                        <div class="col-md-6"><input type="email" class="form-control form-control-lg rounded-3" placeholder="Email Address" required></div>
+                        <div class="col-12"><textarea class="form-control form-control-lg rounded-3" rows="3" placeholder="Message details" required></textarea></div>
+                        <div class="col-12"><button type="submit" class="btn btn-success btn-lg rounded-pill w-100">Send Message</button></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-custom">
+        <div class="container text-center">
+            <p class="fw-bold fs-5 mb-2"><i class="fa-solid fa-leaf text-success me-2"></i>CropGuard AI</p>
+            <p class="small text-white-50 mb-3">&copy; 2026 CropGuard AI — AI-Powered Crop Nutrient Deficiency Detection System. All rights reserved.</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="/">Home</a>
+                <a href="/detect">Detect Deficiency</a>
+                <a href="/admin/login">Admin Portal</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

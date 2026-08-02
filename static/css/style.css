@@ -1,0 +1,274 @@
+/* ===== CropGuard AI - Mobile-First Responsive Design System ===== */
+:root {
+    --primary: #2d6a4f;
+    --primary-light: #40916c;
+    --primary-dark: #1b4332;
+    --primary-accent: #74c69d;
+    --secondary: #d4a373;
+    --accent-orange: #e76f51;
+    --bg-light: #f4f7f5;
+    --bg-white: #ffffff;
+    --text-dark: #1a252c;
+    --text-muted: #6c757d;
+    --border-color: #e2e8f0;
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    --card-shadow-hover: 0 15px 35px rgba(0, 0, 0, 0.12);
+    --radius: 16px;
+    --radius-sm: 10px;
+}
+
+/* Global Reset & Prevent Horizontal Scroll */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden !important;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    line-height: 1.6;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Responsive Touch Targets (Min 48px height) */
+.btn, .form-select, .form-control {
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+/* Glassmorphism Navbar */
+.navbar-custom {
+    background: rgba(27, 67, 50, 0.96);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    padding: 0.8rem 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 1050;
+}
+
+.navbar-brand-text {
+    font-size: clamp(1.1rem, 4vw, 1.4rem);
+    font-weight: 800;
+    color: #ffffff !important;
+    letter-spacing: -0.5px;
+}
+
+.nav-link-custom {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-weight: 500;
+    padding: 0.6rem 1.2rem !important;
+    border-radius: var(--radius-sm);
+    transition: all 0.3s ease;
+}
+
+.nav-link-custom:hover,
+.nav-link-custom.active {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.18);
+}
+
+/* Hero Section - Scalable Responsive Typography */
+.hero-section {
+    background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 60%, #40916c 100%);
+    color: white;
+    padding: clamp(3rem, 8vw, 6rem) 1rem clamp(4rem, 10vw, 7rem);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section h1 {
+    font-size: clamp(1.8rem, 6vw, 3.5rem);
+    line-height: 1.2;
+}
+
+.hero-section p {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+}
+
+.hero-section::after {
+    content: '';
+    position: absolute;
+    bottom: -40px;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: var(--bg-light);
+    transform: skewY(-2deg);
+}
+
+.hero-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(5px);
+    padding: 0.4rem 1.2rem;
+    border-radius: 30px;
+    font-size: clamp(0.75rem, 2vw, 0.9rem);
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+/* Cards & Glassmorphism */
+.glass-card {
+    background: var(--bg-white);
+    border-radius: var(--radius);
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-color);
+    padding: clamp(1.25rem, 4vw, 2.25rem);
+    transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+    box-shadow: var(--card-shadow-hover);
+}
+
+/* Feature Icons */
+.feature-icon-wrapper {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #d8f3dc, #b7e4c7);
+    color: var(--primary-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    margin-bottom: 1.2rem;
+}
+
+/* Severity Badges */
+.severity-badge {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+.severity-mild { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+.severity-moderate { background: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
+.severity-severe { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+.severity-none { background: #e2e3e5; color: #383d41; border: 1px solid #d6d8db; }
+
+/* Progress Bars */
+.progress-bar-custom {
+    height: 10px;
+    border-radius: 5px;
+    background: #e9ecef;
+    overflow: hidden;
+}
+.progress-bar-custom .fill {
+    height: 100%;
+    border-radius: 5px;
+    transition: width 1s ease-in-out;
+}
+
+/* Action Plan Container */
+.recommendation-card {
+    background: #e8f5e9;
+    border-left: 5px solid var(--primary);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: clamp(1rem, 3vw, 1.75rem);
+}
+
+/* Responsive Table Styling */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.custom-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: white;
+}
+
+.custom-table th {
+    background: var(--primary-dark);
+    color: white;
+    font-weight: 600;
+    padding: 0.85rem 1rem;
+    border: none;
+    white-space: nowrap;
+}
+
+.custom-table td {
+    padding: 0.85rem 1rem;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--border-color);
+    white-space: nowrap;
+}
+
+/* Footer */
+.footer-custom {
+    background: var(--primary-dark);
+    color: rgba(255, 255, 255, 0.8);
+    padding: 3rem 1rem 1.5rem;
+    margin-top: 4rem;
+}
+
+.footer-custom a {
+    color: var(--primary-accent);
+    text-decoration: none;
+}
+
+.footer-custom a:hover {
+    color: white;
+}
+
+/* ===== MEDIA QUERIES FOR MOBILE, TABLET, LAPTOP, DESKTOP ===== */
+
+/* Mobile Phones (320px to 575.98px) */
+@media (max-width: 575.98px) {
+    .container {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+    
+    .navbar-custom {
+        padding: 0.6rem 1rem;
+    }
+
+    /* Stack buttons vertically on mobile */
+    .mobile-stack-buttons {
+        flex-direction: column !important;
+        width: 100%;
+    }
+
+    .mobile-stack-buttons .btn {
+        width: 100% !important;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Stack result cards vertically */
+    .result-grid-mobile {
+        flex-direction: column !important;
+    }
+
+    /* Responsive Canvas Height */
+    .chart-container-mobile {
+        height: 200px !important;
+    }
+}
+
+/* Tablets (576px to 991.98px) */
+@media (min-width: 576px) and (max-width: 991.98px) {
+    .chart-container-mobile {
+        height: 240px !important;
+    }
+}
+
+/* High-DPI / Retinal Image Adaptability */
+img {
+    max-width: 100%;
+    height: auto;
+}

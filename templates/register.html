@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CropGuard AI - Register</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-left">
+            <h1>🌿 CropGuard AI</h1>
+            <p>AI-Powered Crop Nutrient Deficiency Detection System</p>
+            <ul class="features-list">
+                <li>📸 Upload crop leaf images for instant analysis</li>
+                <li>🧠 AI-powered detection using Deep Learning</li>
+                <li>💊 Smart fertilizer recommendations</li>
+                <li>📊 Track and manage all your reports</li>
+                <li>🌾 Support sustainable agriculture</li>
+            </ul>
+        </div>
+        <div class="auth-right">
+            <div class="auth-form">
+                <h2>Create Account</h2>
+                <p class="subtitle">Join CropGuard AI to start detecting crop deficiencies</p>
+                
+                <div id="register-alert" class="alert"></div>
+                
+                <form onsubmit="handleRegister(event)">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" placeholder="Choose a username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" placeholder="Create a password (min 6 chars)" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="role">Role</label>
+                        <select id="role">
+                            <option value="farmer">Farmer</option>
+                            <option value="researcher">Researcher</option>
+                            <option value="officer">Agricultural Officer</option>
+                            <option value="student">Student</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-primary">Register</button>
+                </form>
+                
+                <p class="switch-text">
+                    Already have an account? <a href="/login">Login here</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

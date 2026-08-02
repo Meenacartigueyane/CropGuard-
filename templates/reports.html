@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CropGuard AI - Database Reports</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <div class="logo-icon">🌿</div>
+            <span>CropGuard AI</span>
+        </div>
+        <div class="navbar-nav">
+            <a href="/dashboard">Dashboard</a>
+            <a href="/detect">Detect</a>
+            <a href="/reports" class="active">Reports</a>
+        </div>
+        <div class="nav-user">
+            <span class="user-badge">👤 User</span>
+            <button class="btn-logout" onclick="handleLogout()">Logout</button>
+        </div>
+    </nav>
+
+    <!-- Reports Content -->
+    <div class="reports-container">
+        <div class="page-header">
+            <h1>📋 Detection Database Reports</h1>
+            <p>View, track, and manage all your stored crop deficiency detection records and uploaded leaf images</p>
+        </div>
+
+        <div id="reports-alert" class="alert"></div>
+
+        <div class="reports-table" id="reports-table-container">
+            <div class="loading-overlay active">
+                <div class="spinner"></div>
+                <h3>Loading Reports from Database...</h3>
+            </div>
+        </div>
+
+        <div style="margin-top: 1.5rem; text-align: center;">
+            <a href="/detect" class="btn-detect" style="text-decoration: none;">+ Upload New Image & Detect</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 CropGuard AI - AI-Powered Crop Nutrient Deficiency Detection System</p>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
