@@ -17,8 +17,8 @@ CropGuard AI is a professional AI-powered web application built with Python (Fla
 
 ### 2. Host/Admin Module (Protected Session Authentication)
 - **Admin Login**:
-  - **Default Username**: `host`
-  - **Default Password**: `CropGuard@2026`
+  - **Default Username**
+  - **Default Password**
 - **Admin Dashboard**:
   - Stat Cards: Total Predictions, Healthy Plants, Deficient Plants, Today/Weekly/Monthly counts, Top Deficiency, Top Crop.
   - Chart.js Visualizations: Bar Charts for deficiency distribution, Pie Charts for severity ratio.
