@@ -1,4 +1,4 @@
-# CropGuard AI - Crop Nutrient Deficiency Detection System
+# CropGuard AI 🌿 - Crop Nutrient Deficiency Detection System
 
 ## Project Overview
 
